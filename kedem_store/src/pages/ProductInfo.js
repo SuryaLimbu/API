@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import fetchData from "../components/API";
-
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const ProductInfo = () => {
+    const {id} = useParams();
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         const fetchDataFromAPI = async () => {
             try {
-                const response = await fetchData('/products/1');
+                const response = await fetchData(`/products/${id}`);
                 setData(response);
                 console.log(response);
 
@@ -22,173 +25,173 @@ const ProductInfo = () => {
 
         };
         fetchDataFromAPI();
-    }, []);
+    }, [id]);
+
     if (isLoading) {
         return <p>Loading...</p>; // or display a loading spinner
     }
+
     return (
         <>
             {/* breadcrum */}
-            <div class="container py-4 flex items-center gap-3">
-                <a href="../index.html" class="text-primary text-base">
-                    <i class="fa-solid fa-house"></i>
-                </a>
-                <span class="text-sm text-gray-400">
-                    <i class="fa-solid fa-chevron-right"></i>
+            <div className="container py-4 flex items-center gap-3">
+                <Link href="../index.html" className="text-primary text-base">
+                    <i className="fa-solid fa-house"></i>
+                </Link>
+                <span className="text-sm text-gray-400">
+                    <i className="fa-solid fa-chevron-right"></i>
                 </span>
-                <p class="text-gray-600 font-medium">Product</p>
+                <p className="text-gray-600 font-medium">Product</p>
             </div>
 
             {/* Product Details */}
-            <div class="container grid grid-cols-2 gap-6">
+            <div className="container grid grid-cols-2 gap-6">
                 <div>
-                    <img src="../assets/images/products/product1.jpg" alt="product" class="w-full" />
-                    <div class="grid grid-cols-5 gap-4 mt-4">
-                        <img src="../assets/images/products/product2.jpg" alt="product2"
-                            class="w-full cursor-pointer border border-primary" />
-                        <img src="../assets/images/products/product3.jpg" alt="product2" class="w-full cursor-pointer border" />
-                        <img src="../assets/images/products/product4.jpg" alt="product2" class="w-full cursor-pointer border" />
-                        <img src="../assets/images/products/product5.jpg" alt="product2" class="w-full cursor-pointer border" />
-                        <img src="../assets/images/products/product6.jpg" alt="product2" class="w-full cursor-pointer border" />
+                    <img src={data.image} alt="product" className="w-full" />
+                    <div className="grid grid-cols-5 gap-4 mt-4">
+                        <img src={data.image} alt="product2"
+                            className="w-full cursor-pointer border border-primary" />
+                        <img src={data.image} alt="product2" className="w-full cursor-pointer border" />
+                        <img src={data.image} alt="product2" className="w-full cursor-pointer border" />
+                        <img src={data.image} alt="product2" className="w-full cursor-pointer border" />
+                        <img src={data.image} alt="product2" className="w-full cursor-pointer border" />
                     </div>
                 </div>
 
                 <div>
-                    <h2 class="text-3xl font-medium uppercase mb-2">Italian L Shape Sofa</h2>
-                    <div class="flex items-center mb-4">
-                        <div class="flex gap-1 text-sm text-yellow-400">
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
+                    <h2 className="text-3xl font-medium uppercase mb-2">{data.title}</h2>
+                    <div className="flex items-center mb-4">
+                        <div className="flex gap-1 text-sm text-yellow-400">
+                            <span><i className="fa-solid fa-star"></i></span>
+                            <span><i className="fa-solid fa-star"></i></span>
+                            <span><i className="fa-solid fa-star"></i></span>
+                            <span><i className="fa-solid fa-star"></i></span>
+                            <span><i className="fa-solid fa-star"></i></span>
                         </div>
-                        <div class="text-xs text-gray-500 ml-3">(150 Reviews)</div>
+                        <div className="text-xs text-gray-500 ml-3">({data.rating.count} Reviews)</div>
                     </div>
-                    <div class="space-y-2">
-                        <p class="text-gray-800 font-semibold space-x-2">
+                    <div className="space-y-2">
+                        <p className="text-gray-800 font-semibold space-x-2">
                             <span>Availability: </span>
-                            <span class="text-green-600">In Stock</span>
+                            <span className="text-green-600">In Stock</span>
                         </p>
-                        <p class="space-x-2">
-                            <span class="text-gray-800 font-semibold">Brand: </span>
-                            <span class="text-gray-600">Apex</span>
+                        <p className="space-x-2">
+                            <span className="text-gray-800 font-semibold">Brand: </span>
+                            <span className="text-gray-600">Apex</span>
                         </p>
-                        <p class="space-x-2">
-                            <span class="text-gray-800 font-semibold">Category: </span>
-                            <span class="text-gray-600">Sofa</span>
+                        <p className="space-x-2">
+                            <span className="text-gray-800 font-semibold">Category: </span>
+                            <span className="text-gray-600">{data.category}</span>
                         </p>
-                        <p class="space-x-2">
-                            <span class="text-gray-800 font-semibold">SKU: </span>
-                            <span class="text-gray-600">BE45VGRT</span>
+                        <p className="space-x-2">
+                            <span className="text-gray-800 font-semibold">SKU: </span>
+                            <span className="text-gray-600">BE45VGRT</span>
                         </p>
                     </div>
-                    <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
-                        <p class="text-xl text-primary font-semibold">$45.00</p>
-                        <p class="text-base text-gray-400 line-through">$55.00</p>
+                    <div className="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
+                        <p className="text-xl text-primary font-semibold">${data.price}</p>
+                        <p className="text-base text-gray-400 line-through">$55.00</p>
                     </div>
 
-                    <p class="mt-4 text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius eum
-                        reprehenderit dolore vel mollitia optio consequatur hic asperiores inventore suscipit, velit
-                        consequuntur, voluptate doloremque iure necessitatibus adipisci magnam porro.</p>
+                    <p className="mt-4 text-gray-600">{data.description}</p>
 
-                    <div class="pt-4">
-                        <h3 class="text-sm text-gray-800 uppercase mb-1">Size</h3>
-                        <div class="flex items-center gap-2">
-                            <div class="size-selector">
-                                <input type="radio" name="size" id="size-xs" class="hidden" />
+                    <div className="pt-4">
+                        <h3 className="text-sm text-gray-800 uppercase mb-1">Size</h3>
+                        <div className="flex items-center gap-2">
+                            <div className="size-selector">
+                                <input type="radio" name="size" id="size-xs" className="hidden" />
                                 <label for="size-xs"
-                                    class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">XS</label>
+                                    className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">XS</label>
                             </div>
-                            <div class="size-selector">
-                                <input type="radio" name="size" id="size-sm" class="hidden" />
+                            <div className="size-selector">
+                                <input type="radio" name="size" id="size-sm" className="hidden" />
                                 <label for="size-sm"
-                                    class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">S</label>
+                                    className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">S</label>
                             </div>
-                            <div class="size-selector">
-                                <input type="radio" name="size" id="size-m" class="hidden" />
+                            <div className="size-selector">
+                                <input type="radio" name="size" id="size-m" className="hidden" />
                                 <label for="size-m"
-                                    class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">M</label>
+                                    className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">M</label>
                             </div>
-                            <div class="size-selector">
-                                <input type="radio" name="size" id="size-l" class="hidden" />
+                            <div className="size-selector">
+                                <input type="radio" name="size" id="size-l" className="hidden" />
                                 <label for="size-l"
-                                    class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">L</label>
+                                    className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">L</label>
                             </div>
-                            <div class="size-selector">
-                                <input type="radio" name="size" id="size-xl" class="hidden" />
+                            <div className="size-selector">
+                                <input type="radio" name="size" id="size-xl" className="hidden" />
                                 <label for="size-xl"
-                                    class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">XL</label>
+                                    className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">XL</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-4">
-                        <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Color</h3>
-                        <div class="flex items-center gap-2">
-                            <div class="color-selector">
-                                <input type="radio" name="color" id="red" class="hidden" />
+                    <div className="pt-4">
+                        <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Color</h3>
+                        <div className="flex items-center gap-2">
+                            <div className="color-selector">
+                                <input type="radio" name="color" id="red" className="hidden" />
                                 <label for="red"
-                                    class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
-                                    style="background-color: #fc3d57;"></label>
+                                    className="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block bg-red-600"
+                                ></label>
                             </div>
-                            <div class="color-selector">
-                                <input type="radio" name="color" id="black" class="hidden" />
+                            <div className="color-selector">
+                                <input type="radio" name="color" id="black" className="hidden" />
                                 <label for="black"
-                                    class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
-                                    style="background-color: #000;"></label>
+                                    className="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block bg-black"
+                                ></label>
                             </div>
-                            <div class="color-selector">
-                                <input type="radio" name="color" id="white" class="hidden" />
+                            <div className="color-selector">
+                                <input type="radio" name="color" id="white" className="hidden" />
                                 <label for="white"
-                                    class="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
-                                    style="background-color: #fff;"></label>
+                                    className="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block bg-white"
+                                ></label>
                             </div>
 
                         </div>
                     </div>
 
-                    <div class="mt-4">
-                        <h3 class="text-sm text-gray-800 uppercase mb-1">Quantity</h3>
-                        <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
-                            <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
-                            <div class="h-8 w-8 text-base flex items-center justify-center">4</div>
-                            <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                    <div className="mt-4">
+                        <h3 className="text-sm text-gray-800 uppercase mb-1">Quantity</h3>
+                        <div className="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                            <div className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                            <div className="h-8 w-8 text-base flex items-center justify-center">4</div>
+                            <div className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
                         </div>
                     </div>
 
-                    <div class="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
-                        <a href="#"
-                            class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
-                            <i class="fa-solid fa-bag-shopping"></i> Add to cart
-                        </a>
-                        <a href="#"
-                            class="border border-gray-300 text-gray-600 px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition">
-                            <i class="fa-solid fa-heart"></i> Wishlist
-                        </a>
+                    <div className="mt-6 flex gap-3 border-b border-gray-200 pb-5 pt-5">
+                        <Link href="#"
+                            className="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
+                            <i className="fa-solid fa-bag-shopping"></i> Add to cart
+                        </Link>
+                        <Link href="#"
+                            className="border border-gray-300 text-gray-600 px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition">
+                            <i className="fa-solid fa-heart"></i> Wishlist
+                        </Link>
                     </div>
 
-                    <div class="flex gap-3 mt-4">
-                        <a href="#"
-                            class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-                        <a href="#"
-                            class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-                        <a href="#"
-                            class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
+                    <div className="flex gap-3 mt-4">
+                        <Link href="#"
+                            className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
+                            <i className="fa-brands fa-facebook-f"></i>
+                        </Link>
+                        <Link href="#"
+                            className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
+                            <i className="fa-brands fa-twitter"></i>
+                        </Link>
+                        <Link href="#"
+                            className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
+                            <i className="fa-brands fa-instagram"></i>
+                        </Link>
                     </div>
                 </div>
             </div>
             {/* Product Description */}
-            <div class="container pb-16">
-                <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">Product details</h3>
-                <div class="w-3/5 pt-6">
-                    <div class="text-gray-600">
+            <div className="container pb-16 py-16">
+                <h3 className="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-bold">Product details</h3>
+                <div className="w-3/5 pt-6">
+                    <div className="text-gray-600">
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur necessitatibus deleniti natus
                             dolore cum maiores suscipit optio itaque voluptatibus veritatis tempora iste facilis non aut
                             sapiente dolor quisquam, ex ab.</p>
@@ -200,18 +203,18 @@ const ProductInfo = () => {
                             numquam labore amet.</p>
                     </div>
 
-                    <table class="table-auto border-collapse w-full text-left text-gray-600 text-sm mt-6">
+                    <table className="table-auto border-collapse w-full text-left text-gray-600 text-sm mt-6">
                         <tr>
-                            <th class="py-2 px-4 border border-gray-300 w-40 font-medium">Color</th>
-                            <th class="py-2 px-4 border border-gray-300 ">Blank, Brown, Red</th>
+                            <th className="py-2 px-4 border border-gray-300 w-40 font-medium">Color</th>
+                            <th className="py-2 px-4 border border-gray-300 ">Blank, Brown, Red</th>
                         </tr>
                         <tr>
-                            <th class="py-2 px-4 border border-gray-300 w-40 font-medium">Material</th>
-                            <th class="py-2 px-4 border border-gray-300 ">Latex</th>
+                            <th className="py-2 px-4 border border-gray-300 w-40 font-medium">Material</th>
+                            <th className="py-2 px-4 border border-gray-300 ">Latex</th>
                         </tr>
                         <tr>
-                            <th class="py-2 px-4 border border-gray-300 w-40 font-medium">Weight</th>
-                            <th class="py-2 px-4 border border-gray-300 ">55kg</th>
+                            <th className="py-2 px-4 border border-gray-300 w-40 font-medium">Weight</th>
+                            <th className="py-2 px-4 border border-gray-300 ">55kg</th>
                         </tr>
                     </table>
                 </div>
