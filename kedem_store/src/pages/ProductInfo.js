@@ -45,8 +45,8 @@ const ProductInfo = () => {
             </div>
 
             {/* Product Details */}
-            <div className="container grid grid-cols-2 gap-6">
-                <div>
+            <div className="container grid grid-cols-2 gap-6 text-left">
+                <div className="justify-center">
                     <img src={data.image} alt="product" className="w-full" />
                     <div className="grid grid-cols-5 gap-4 mt-4">
                         <img src={data.image} alt="product2"
@@ -58,7 +58,7 @@ const ProductInfo = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className="">
                     <h2 className="text-3xl font-medium uppercase mb-2">{data.title}</h2>
                     <div className="flex items-center mb-4">
                         <div className="flex gap-1 text-sm text-yellow-400">
@@ -188,7 +188,7 @@ const ProductInfo = () => {
                 </div>
             </div>
             {/* Product Description */}
-            <div className="container pb-16 py-16">
+            <div className="container pb-16 py-16 text-left">
                 <h3 className="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-bold">Product details</h3>
                 <div className="w-3/5 pt-6">
                     <div className="text-gray-600">

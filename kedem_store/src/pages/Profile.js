@@ -1,11 +1,14 @@
 import React from "react";
+import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
+
+
 
 const Profile = () => {
     return (
         <>
-        {/* // <!-- breadcrumb --> */}
-            <div class="container py-4 flex items-center gap-3">
+            {/* // <!-- breadcrumb --> */}
+            < div class="container py-4 flex items-center gap-3" >
                 <Link to="../index.html" class="text-primary text-base">
                     <i class="fa-solid fa-house"></i>
                 </Link>
@@ -13,96 +16,12 @@ const Profile = () => {
                     <i class="fa-solid fa-chevron-right"></i>
                 </span>
                 <p class="text-gray-600 font-medium">Profile</p>
-            </div>
-        {/* // <!-- ./breadcrumb --> */}
+            </div >
+            {/* // <!-- ./breadcrumb --> */}
 
             {/* <!-- wrapper-- > */}
             <div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
-
-                {/* <!-- sidebar --> */}
-                <div class="col-span-3">
-                    <div class="px-4 py-3 shadow flex items-center gap-4">
-                        <div class="flex-shrink-0">
-                            <img src="../assets/images/avatar.png" alt="profile"
-                                class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover"/>
-                        </div>
-                        <div class="flex-grow">
-                            <p class="text-gray-600">Hello,</p>
-                            <h4 class="text-gray-800 font-medium">Surya Man Kedem </h4>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
-                        <div class="space-y-1 pl-8">
-                            <Link to="#" class="relative text-primary block font-medium capitalize transition">
-                                <span class="absolute -left-8 top-0 text-base">
-                                    <i class="fa-regular fa-address-card"></i>
-                                </span>
-                                Manage account
-                            </Link>
-                            <Link to="#" class="relative hover:text-primary block capitalize transition">
-                                Profile information
-                            </Link>
-                            <Link to="#" class="relative hover:text-primary block capitalize transition">
-                                Manage addresses
-                            </Link>
-                            <Link to="#" class="relative hover:text-primary block capitalize transition">
-                                Change password
-                            </Link>
-                        </div>
-
-                        <div class="space-y-1 pl-8 pt-4">
-                            <Link to="#" class="relative hover:text-primary block font-medium capitalize transition">
-                                <span class="absolute -left-8 top-0 text-base">
-                                    <i class="fa-solid fa-box-archive"></i>
-                                </span>
-                                My order history
-                            </Link>
-                            <Link to="#" class="relative hover:text-primary block capitalize transition">
-                                My returns
-                            </Link>
-                            <Link to="#" class="relative hover:text-primary block capitalize transition">
-                                My Cancellations
-                            </Link>
-                            <Link to="#" class="relative hover:text-primary block capitalize transition">
-                                My reviews
-                            </Link>
-                        </div>
-
-                        <div class="space-y-1 pl-8 pt-4">
-                            <Link to="#" class="relative hover:text-primary block font-medium capitalize transition">
-                                <span class="absolute -left-8 top-0 text-base">
-                                    <i class="fa-regular fa-credit-card"></i>
-                                </span>
-                                Payment methods
-                            </Link>
-                            <Link to="#" class="relative hover:text-primary block capitalize transition">
-                                voucher
-                            </Link>
-                        </div>
-
-                        <div class="space-y-1 pl-8 pt-4">
-                            <Link to="#" class="relative hover:text-primary block font-medium capitalize transition">
-                                <span class="absolute -left-8 top-0 text-base">
-                                    <i class="fa-regular fa-heart"></i>
-                                </span>
-                                My wishlist
-                            </Link>
-                        </div>
-
-                        <div class="space-y-1 pl-8 pt-4">
-                            <Link to="#" class="relative hover:text-primary block font-medium capitalize transition">
-                                <span class="absolute -left-8 top-0 text-base">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                </span>
-                                Logout
-                            </Link>
-                        </div>
-
-                    </div>
-                </div>
-                {/* <!-- ./sidebar --> */}
-
+                <Sidebar />
                 {/* <!-- info --> */}
                 <div class="col-span-9 shadow rounded px-6 pt-5 pb-7">
                     <h4 class="text-lg font-medium capitalize mb-4">
@@ -112,17 +31,17 @@ const Profile = () => {
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="first">First name</label>
-                                <input type="text" name="first" id="first" class="input-box"/>
+                                <input type="text" name="first" id="first" class="input-box" />
                             </div>
                             <div>
                                 <label for="last">Last name</label>
-                                <input type="text" name="last" id="last" class="input-box"/>
+                                <input type="text" name="last" id="last" class="input-box" />
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="birthday">Birthday</label>
-                                <input type="date" name="birthday" id="birthday" class="input-box"/>
+                                <input type="date" name="birthday" id="birthday" class="input-box" />
                             </div>
                             <div>
                                 <label for="gender">Gender</label>
@@ -135,11 +54,11 @@ const Profile = () => {
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="email">Email Address</label>
-                                <input type="email" name="email" id="email" class="input-box"/>
+                                <input type="email" name="email" id="email" class="input-box" />
                             </div>
                             <div>
                                 <label for="phone">Phone number</label>
-                                <input type="text" name="phone" id="phone" class="input-box"/>
+                                <input type="text" name="phone" id="phone" class="input-box" />
                             </div>
                         </div>
                     </div>
@@ -153,7 +72,6 @@ const Profile = () => {
                 {/* <!-- ./info --> */}
 
             </div>
-            {/* <!-- ./wrapper --> */}
         </>
     );
 }

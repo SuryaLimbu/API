@@ -32,7 +32,7 @@ const Categories = () => {
             <div className="grid grid-cols-3 gap-3">
                 {data.map((category) => (
                     <div className="relative rounded-sm overflow-hidden group">
-                        <img src="assets/images/category/category-1.jpg" alt="category 1" className="w-full" />
+                        <img src="https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="category 1" className="w-full" />
                         <a href="#"
                             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">{category}</a>
                     </div>

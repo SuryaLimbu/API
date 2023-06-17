@@ -42,7 +42,7 @@ const Header = () => {
                                 className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                                 2</div>
                         </Link>
-                        <Link to={`/profile`} className="text-center text-gray-700 hover:text-primary transition relative">
+                        <Link to={`/user`} className="text-center text-gray-700 hover:text-primary transition relative">
                             <div className="text-2xl">
                                 <i className="fa-regular fa-user"></i>
                             </div>
