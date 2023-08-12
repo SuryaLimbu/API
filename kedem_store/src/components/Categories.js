@@ -29,7 +29,7 @@ const Categories = () => {
     return (
         <div className="container py-16">
             <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">shop by category</h2>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-4 gap-3">
                 {data.map((category) => (
                     <div className="relative rounded-sm overflow-hidden group">
                         <img src="https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="category 1" className="w-full" />

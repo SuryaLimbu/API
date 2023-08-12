@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const Items = (props) => {
    return (
+      
       // <div classNameName="bg-white shadow rounded overflow-hidden group">
       //     <div classNameName="relative ">
       //         <img src={props.product.className} alt="product 1" classNameName="w-70 h-80 mx-auto" />
@@ -45,10 +46,10 @@ const Items = (props) => {
       //         classNameName="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
       //         to cart</a>
       // </div>
-      <div class="item">
+      <div class="item shadow rounded-lg">
          <div class="product-cart-three w-full group">
             <div class="w-full h-[364px] bg-white flex justify-center items-center p-2.5 mb-6 relative overflow-hidden">
-               <img src={props.product.image} alt="" />
+               <img className=" rounded-lg p-2" src={props.product.image} alt="" />
                <div class="quick-access-btns flex flex-col space-y-2 absolute group-hover:right-4 -right-10 top-20  transition-all duration-300 ease-in-out">
                   <a href="#">
                      <span class="w-10 h-10 flex justify-center items-center bg-gray-200 rounded">
@@ -77,7 +78,7 @@ const Items = (props) => {
                   </a>
                </div>
                <div class="absolute w-full h-10 px-[30px]  left-0 -bottom-10 group-hover:bottom-5 transition-all duration-300 ease-in-out">
-                  <button type="button" class="bg-primary w-full h-full flex justify-center items-center text-white">
+                  <button type="button" class="bg-primary w-full h-full flex justify-center items-center text-white rounded-lg">
                      <div class="flex items-center space-x-3">
                         <span>
                            <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-current">
@@ -94,6 +95,7 @@ const Items = (props) => {
             <p class="text-base leading-6 font-medium text-gray">${props.product.price} <span class="text-primary">$6.99</span> </p>
          </div>
       </div>
+     
 
    );
 }
