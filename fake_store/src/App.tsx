@@ -18,8 +18,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomeLayout />} />
-          <Route path="/productDetails" element={<ProductDetails />} />
-          <Route path="/categoryfilter" element={<CategoryFilterLayout />} />
+          <Route path="/productDetails/:id" element={<ProductDetails />} />
+          <Route path="/categoryfilter/:title" element={<CategoryFilterLayout />} />
         </Routes>
         <Footer />
       </Router>

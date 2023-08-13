@@ -1,13 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
 import { FiFilter, FiChevronDown } from "react-icons/fi";
+import { useParams } from "react-router-dom";
 
 const CategoryFilterLayout = () => {
+    const { title } = useParams();
+    // console.log(category);
     const [isCollapsed, setIsCollapsed] = useState(true);
+    const [data, setData] = useState([])
     const toggleCollapse = () => {
         setIsCollapsed(!isCollapsed);
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    `${import.meta.env.VITE_API_URL}/products/category/${title}`
+                );
+                // console.log(response);
+                setData(response.data);
+                // setIsLoading(false);
+                // window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, [title]);
+
+    console.log(data)
 
     return (
         <>
@@ -173,18 +197,11 @@ const CategoryFilterLayout = () => {
 
                 <section className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-6 lg:px-8">
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
-                        <ProductCard />
+                        {data.map(product => (
+                            <ProductCard product={product} />
+                        ))}
+
+
 
 
                     </div>

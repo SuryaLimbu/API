@@ -1,8 +1,34 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { Link } from "react-router-dom";
+
+// 
+import { CartProvider, useCart } from "react-use-cart";
 const Navbar = () => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_API_URL}/products/categories`)
+            .then((res) => {
+                setCategories(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.get(`https://fakestoreapi.com/carts`).then((res) => {
+            console.log(res);
+        })
+    })
+
+
+    // cart
+    const { isEmpty, totalUniqueItems, items, cartTotal } = useCart();
+
+    // console.log(categories)
     return (
         <>
             <div className="navbar max-w-7xl mx-auto bg-base-100 px-4 sm:px-10 md:px-20 lg:px-30 py-4">
@@ -33,8 +59,11 @@ const Navbar = () => {
                             <details>
                                 <summary>Categories</summary>
                                 <ul className="p-2">
-                                    <li><a>Electronics</a></li>
-                                    <li><a>Clothings</a></li>
+                                    {categories.map((category) => (
+                                        <li key={category}>
+                                            <Link to={`/categoryfilter/${category}`}>{category}</Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </details>
                         </li>
@@ -61,14 +90,17 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
                             <div className="indicator bg-gray-100 p-3 rounded-full">
-                                <FiShoppingCart className="w-5 h-5"/>
-                                <span className="badge badge-sm indicator-item">8</span>
+                                <FiShoppingCart className="w-5 h-5" />
+                                <span className="badge badge-sm indicator-item">{totalUniqueItems} </span>
                             </div>
                         </label>
                         <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                             <div className="card-body">
-                                <span className="font-bold text-lg">8 Items</span>
-                                <span className="text-info">Subtotal: $999</span>
+                                <span className="font-bold text-lg">{totalUniqueItems} Items</span>
+                                <div>
+                                    cart items here
+                                </div>
+                                <span className="text-info">Subtotal: ${cartTotal}</span>
                                 <div className="card-actions">
                                     <button className="btn btn-primary btn-block">View cart</button>
                                 </div>

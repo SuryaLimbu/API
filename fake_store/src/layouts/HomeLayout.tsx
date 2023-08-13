@@ -1,11 +1,31 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
 
 
+
 const HomeLayout = () => {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    "https://fakestoreapi.com/products"
+                );
+                setData(response.data);
+                setIsLoading(false);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, []);
+    // console.log(data);
+
     return (
         <div>
 
@@ -17,16 +37,12 @@ const HomeLayout = () => {
                     <h1 className=" font-semibold text-xl"><Link to="">Recommended</Link></h1>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+
+                    {data.map(product => (
+                        <ProductCard product={product} />
+                    ))}
+
+
                 </div>
 
             </div>
