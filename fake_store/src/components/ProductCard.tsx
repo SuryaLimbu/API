@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
-
-const ProductCard = ({ product }) => {
+import React from "react";
+// Define the type for the product prop
+interface ProductCardProps {
+    product: {
+        id: number;
+        title: string;
+        price: number;
+        description: string;
+        category: string;
+        image: string;
+        rating: {
+            rate: number;
+            count: number;
+        };
+    };
+}
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     // console.log(product);
     return (
         <>

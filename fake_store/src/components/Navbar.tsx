@@ -4,7 +4,7 @@ import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { Link } from "react-router-dom";
 
 // 
-import { CartProvider, useCart } from "react-use-cart";
+import {useCart } from "react-use-cart";
 const Navbar = () => {
     const [categories, setCategories] = useState([]);
 
@@ -18,15 +18,15 @@ const Navbar = () => {
             })
     }, [])
 
-    useEffect(() => {
-        axios.get(`https://fakestoreapi.com/carts`).then((res) => {
-            console.log(res);
-        })
-    })
+    // useEffect(() => {
+    //     axios.get(`https://fakestoreapi.com/carts`).then((res) => {
+    //         // console.log(res);
+    //     })
+    // })
 
 
     // cart
-    const { isEmpty, totalUniqueItems, items, cartTotal } = useCart();
+    const { totalUniqueItems, cartTotal } = useCart();
 
     // console.log(categories)
     return (

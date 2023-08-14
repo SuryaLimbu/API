@@ -5,19 +5,38 @@ import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
 
 
+import { Product } from "../models/Product";
 
-const HomeLayout = () => {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+
+interface StateProduct {
+    loading: boolean,
+    products: Product[],
+    error: string
+}
+
+const HomeLayout: React.FC = () => {
+    const [data, setData] = useState<StateProduct>({
+        loading: true,
+        products: [],
+        error: ""
+    });
+
+    // const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setData(prevData => ({ ...prevData, loading: true }));
                 const response = await axios.get(
                     "https://fakestoreapi.com/products"
                 );
-                setData(response.data);
-                setIsLoading(false);
+                setData(prevData => ({
+                    ...prevData,
+                    loading: false,
+                    products: response.data,
+                    error: ""
+                }));
+                // setIsLoading(false);
             } catch (error) {
                 console.log(error);
             }
@@ -38,8 +57,8 @@ const HomeLayout = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                    {data.map(product => (
-                        <ProductCard product={product} />
+                    {data.products.map(product => (
+                        <ProductCard key={product.id} product={product} />
                     ))}
 
 
